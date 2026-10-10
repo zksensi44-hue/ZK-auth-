@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: zk-auth-callback
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    plan: free
+    envVars:
+      - key: DISCORD_CLIENT_ID
+        sync: false
+      - key: DISCORD_CLIENT_SECRET
+        sync: false
+      - key: DISCORD_REDIRECT_URI
+        sync: false
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: DISCORD_SCOPES
+        value: identify
